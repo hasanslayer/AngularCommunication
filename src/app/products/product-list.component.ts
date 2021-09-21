@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
 
 import { IProduct } from './product';
 import { ProductService } from './product.service';
@@ -16,6 +16,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     errorMessage: string;
 
     @ViewChild('filterElement') filterElementRef: ElementRef;
+    @ViewChildren('filterElement, nameElement') inputElementRefs: QueryList<ElementRef>;
 
     private _listFilter: string;
     public get listFilter(): string {
@@ -29,9 +30,10 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     filteredProducts: IProduct[];
     products: IProduct[];
 
-    constructor(private productService: ProductService) {}
+    constructor(private productService: ProductService) { }
     ngAfterViewInit(): void {
         this.filterElementRef.nativeElement.focus();
+        console.log(this.inputElementRefs);
     }
 
     ngOnInit(): void {
