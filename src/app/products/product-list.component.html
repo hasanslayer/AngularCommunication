@@ -11,11 +11,6 @@
                 <input type='text' #filterElement
                        [(ngModel)]='listFilter' />
             </div>
-            <div class='col-md-2'>Filter by:</div>
-            <div class='col-md-4'>
-                <input type='text' #nameElement
-                       [(ngModel)]='filterName' />
-            </div>
         </div>
         <div class='row' [hidden]='!listFilter'>
             <div class='col-md-10'>
