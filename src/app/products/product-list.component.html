@@ -5,17 +5,10 @@
 
     <div class='panel-body'>
         <!-- Filter by the Title   -->
-        <div class='row'>
-            <div class='col-md-2'>Filter by:</div>
-            <div class='col-md-4'>
-                <input type='text' #filterElement
-                       [(ngModel)]='listFilter' />
-            </div>
-        </div>
-        <div class='row' [hidden]='!listFilter'>
-            <div class='col-md-10'>
-                <h3>Filtered by: {{listFilter}} </h3>
-            </div>
+        <div class="row">
+            <pm-criteria class="col-md-10">
+
+            </pm-criteria>
         </div>
 
         <div class='table-responsive'>

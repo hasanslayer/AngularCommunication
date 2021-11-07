@@ -8,7 +8,7 @@ import { ProductService } from './product.service';
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit {
     pageTitle: string = 'Product List';
     showImage: boolean;
 
@@ -16,30 +16,17 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     imageMargin: number = 2;
     errorMessage: string;
 
-    @ViewChild('filterElement') filterElementRef: ElementRef;
-
-    private _listFilter: string;
-    public get listFilter(): string {
-        return this._listFilter;
-    }
-    public set listFilter(value: string) {
-        this._listFilter = value;
-        this.performFilter(this.listFilter);
-    }
-
     filteredProducts: IProduct[];
     products: IProduct[];
 
     constructor(private productService: ProductService) { }
-    ngAfterViewInit(): void {
-        this.filterElementRef.nativeElement.focus();
-    }
+
 
     ngOnInit(): void {
         this.productService.getProducts().subscribe(
             (products: IProduct[]) => {
                 this.products = products;
-                this.performFilter(this.listFilter);
+                this.performFilter();
             },
             (error: any) => this.errorMessage = <any>error
         );
