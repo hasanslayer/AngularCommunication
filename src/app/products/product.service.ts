@@ -64,15 +64,22 @@ export class ProductService {
         return this.http.delete<IProduct>(url, { headers: headers })
             .pipe(
                 tap(data => console.log('deleteProduct: ' + id)),
+                tap(data => {
+                    const foundIndex = this.products.findIndex(item => item.id === id);
+                    if (foundIndex > -1) {
+                        this.products.splice(foundIndex, 1);
+                    }
+                }),
                 catchError(this.handleError)
             );
     }
 
     private createProduct(product: IProduct, headers: HttpHeaders): Observable<IProduct> {
-        product.id = null;
+        product.id = null; // its required to be null for in memory web api to be available to next id
         return this.http.post<IProduct>(this.productsUrl, product, { headers: headers })
             .pipe(
                 tap(data => console.log('createProduct: ' + JSON.stringify(data))),
+                tap(data => this.products.push(data)),
                 catchError(this.handleError)
             );
     }
