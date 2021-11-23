@@ -9,6 +9,10 @@ import { IProduct } from '../product';
 export class ProductShellDetailComponent implements OnInit {
     pageTitle: string = 'Product Detail';
 
+    public get product(): IProduct | null {
+        return this.productService.currentProduct;
+    }
+
     constructor(private productService: ProductService) { }
 
     ngOnInit() {
