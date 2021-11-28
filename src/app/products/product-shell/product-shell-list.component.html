@@ -8,6 +8,7 @@
       <button type='button'
               class='list-group-item'
               *ngFor='let product of products'
+              [ngClass]="{'active':product?.id === selectedProduct?.id}"
               (click)="onSelected(product)">
         {{ product.productName }} ({{ product.productCode }})
       </button>

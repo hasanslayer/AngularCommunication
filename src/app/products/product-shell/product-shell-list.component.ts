@@ -11,6 +11,7 @@ export class ProductShellListComponent implements OnInit {
   pageTitle: string = 'Products';
   errorMessage: string;
   products: IProduct[];
+  selectedProduct: IProduct | null;
 
   constructor(private productService: ProductService) { }
 
@@ -21,6 +22,10 @@ export class ProductShellListComponent implements OnInit {
       },
       (error: any) => this.errorMessage = <any>error
     );
+
+    this.productService.selectedProductChanges$.subscribe(
+      selectedProduct => this.selectedProduct = selectedProduct
+      );
   }
 
   onSelected(product: IProduct) {
